@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <body>
+        <canvas id="W1-canvas" width="512" height="512"></canvas>
+
+        <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+        <script type="text/javascript" src="../Common/initShaders.js"></script>
+        <script type="text/javascript" src="../Common/MV.js"></script>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+            attribute vec4 aColor;
+            attribute vec2 vTexCoord;
+
+            varying vec4 vColor;
+            varying vec2 fTexCoord;
+
+            uniform mat4 modelMatrix;
+            uniform mat4 projectionMatrix;
+            uniform mat4 viewMatrix;
+
+
+            void main(){
+                gl_Position =  projectionMatrix * viewMatrix * modelMatrix * vPosition;
+
+                vColor = aColor;
+
+                fTexCoord = vTexCoord;
+            }
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            varying vec2 fTexCoord;
+            varying vec4 vColor;
+
+            uniform sampler2D texMap;
+            uniform sampler2D colorMap;
+
+            uniform int drawMode;
+
+            void main(){
+                if(drawMode == 1){
+                    gl_FragColor = texture2D(texMap, fTexCoord);
+                } else {
+                    gl_FragColor = texture2D(colorMap, fTexCoord);
+                }
+            }
+        </script>
+
+        <script type="text/javascript" src="w9p1.js"></script>
+        <button id="toggleRot">Toggle Rotation</button>
+    </body>
+</html>

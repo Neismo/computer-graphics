@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <body>
+        <canvas id="W1-canvas" width="512" height="512"></canvas>
+
+        <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+        <script type="text/javascript" src="../Common/initShaders.js"></script>
+        <script type="text/javascript" src="../Common/MV.js"></script>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+            attribute vec4 aColor;
+            attribute vec2 vTexCoord;
+
+            varying vec4 vColor;
+            varying vec2 fTexCoord;
+
+            uniform mat4 modelMatrix;
+            uniform mat4 projectionMatrix;
+            uniform mat4 viewMatrix;
+
+
+            void main(){
+                gl_Position =  projectionMatrix * viewMatrix * modelMatrix * vPosition;
+
+                fTexCoord = vTexCoord;
+                vColor = aColor;
+            }
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            varying vec4 vColor;
+            varying vec2 fTexCoord;
+
+            uniform sampler2D texMap;
+
+            void main(){
+                gl_FragColor = texture2D(texMap, fTexCoord);
+            }
+        </script>
+
+        <script type="text/javascript" src="w7p1.js"></script>
+    </body>
+</html>

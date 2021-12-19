@@ -1,0 +1,1 @@
+I was unable to get the GBAR webpage to run correctly, debugged it as much as I could. I did instead run a local server with python3 in order to do the exercises. I hope this suffices.

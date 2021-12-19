@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <body>
+        <canvas id="W1-canvas" width="512" height="512"></canvas>
+
+        <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+        <script type="text/javascript" src="../Common/initShaders.js"></script>
+        <script type="text/javascript" src="../Common/MV.js"></script>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+            attribute vec4 aColor;
+            attribute vec2 vTexCoord;
+
+            varying vec4 vColor;
+            varying vec2 fTexCoord;
+
+            uniform mat4 modelMatrix;
+            uniform mat4 projectionMatrix;
+            uniform mat4 viewMatrix;
+
+
+            void main(){
+                gl_Position =  projectionMatrix * viewMatrix * modelMatrix * vPosition;
+
+                fTexCoord = vTexCoord;
+                vColor = aColor;
+            }
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            varying vec4 vColor;
+            varying vec2 fTexCoord;
+
+            uniform sampler2D texMap;
+
+            void main(){
+                gl_FragColor = texture2D(texMap, fTexCoord);
+            }
+        </script>
+
+        <script type="text/javascript" src="w7p2.js"></script><br>
+        <h1>Clamping or Repeating Texturing</h1>
+        <select id="CLAMP_REPEAT" size="2">
+            <option value="0">Clamping</option>
+            <option value="1">Repeating</option>
+        </select>
+        <h1>Change Min/Mag Filters:</h1>
+        <select id="MIN_FILTER" size="2">
+            <option value="0">NEAREST</option>
+            <option value="1">LINEAR</option>
+        </select>
+        <select id="MAG_FILTER" size="2">
+            <option value="0">NEAREST</option>
+            <option value="1">LINEAR</option>
+        </select>
+        <br>
+        <h1>Change Sampling:</h1>
+        <select id="SAMPLING_METHOD" size="4">
+            <option value="0">NEAREST-MIPMAP-NEAREST</option>
+            <option value="1">NEAREST-MIPMAP-LINEAR</option>
+            <option value="2">LINEAR-MIPMAP-NEAREST</option>
+            <option value="3">LINEAR-MIPMAP-LINEAR</option>
+        </select>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+a) What is the difference between Phong shading and Phong lighting (the 
+Phong reflection model)? 
+
+b) What is the difference between flat shading, Gouraud shading, and Phong 
+shading? List pros and cons of each. Is Gouraud or Phong shading the 
+best method for simulating highlights? Explain. 
+
+c) What is the difference between a directional light and a point light? 
+	A point light would have a position, and light emitted from this would differ from a directional light, whose light rays are all parallel.
+
+d) Does the eye position influence the shading of an object in any way? 
+	Yes, when it comes to reflection or the specular lighting, it does matter where the eye position is at, because we utilize the vector torwads the eye in that lighting 		computation.
+	
+e) What is the effect of setting the specular term to (0, 0,0)? f) What is the effect of increasing the shininess exponent (𝛼)? 
+
+g) In what coordinate space did you compute the lighting?
+	I did my lighting calculations in object space, not in eye space. It seems to be a cheaper calculation to do, instead of also multiplying with the view matrix.

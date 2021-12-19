@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <body>
+        <canvas id="W1-canvas" width="512" height="512"></canvas>
+
+        <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+        <script type="text/javascript" src="../Common/initShaders.js"></script>
+        <script type="text/javascript" src="../Common/MV.js"></script>
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+            attribute vec4 aColor;
+            varying vec4 vColor;
+
+
+            void main(){
+                gl_Position = vPosition;
+                gl_PointSize = 10.0;
+                vColor = aColor;
+            }
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+            varying vec4 vColor;
+
+            void main(){
+                gl_FragColor = vColor;
+            }
+        </script>
+
+        <script type="text/javascript" src="w2p2.js"></script>
+        <button id="clear">Clear Canvas</button>
+        <select id="colors" size="7">
+            <option value="0">Black</option>
+            <option value="1">Red</option>
+            <option value="2">Yellow</option>
+            <option value="3">Green</option>
+            <option value="4">Blue</option>
+            <option value="5">Magenta</option>
+            <option value="6">Cyan</option>
+        </select>
+    </body>
+</html>
